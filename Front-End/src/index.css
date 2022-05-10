@@ -1,0 +1,13 @@
+a,
+u {
+  text-decoration: none;
+  color: inherit;
+}
+.spoilerImage {
+  overflow: hidden;
+  filter: blur(5px);
+  transition: 2s;
+}
+.spoilerImage:hover {
+  filter: none;
+}

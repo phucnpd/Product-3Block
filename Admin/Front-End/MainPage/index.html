@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<title>Menu Administrator | 3Block</title>
+	<!-- Favicon-->
+	<link rel="icon" href="./images/iconLogo.png" />
+	<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.1/css/all.min.css'>
+	<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Montserrat&amp;display=swap"rel="stylesheet'>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="./style.css">
+	<script src="./js/connetdatabase.js"></script>
+	<script>
+		(async function () {
+			var authen = localStorage.getItem('accesstoken')
+			//  xác thực here
+			const authorizationTokenCheck = await welcome()
+			console.log('html ' + authorizationTokenCheck)
+			if (!authorizationTokenCheck) {
+				window.location.pathname = './'
+			}
+		})()
+	</script>
+</head>
+
+<body>
+	<div class="app">
+		<div class="logo">
+			<a href="/MainPage/"><img src="/images/logoMini.png" /></a>
+		</div>
+		<div class="logout">
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+				data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+				aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+			</div>
+			<a href="#" class="btn btn-success btn-md" onclick="logout()">
+				<span class="glyphicon glyphicon-log-out"></span> Log out
+			</a>
+		</div>
+		<div class="cardList">
+			<button class="cardList__btn btn btn--left">
+				<div class="icon">
+					<svg>
+						<use xlink:href="#arrow-left"></use>
+					</svg>
+				</div>
+			</button>
+
+			<div class="cards__wrapper">
+				<div class="card current--card">
+					<div class="card__image" id="BlackList">
+						<img src="./images/Blacklist.png" alt="" />
+					</div>
+				</div>
+
+				<div class="card next--card">
+					<div class="card__image" id="WhiteList">
+						<img src="./images/Whitelist.png" alt="" />
+					</div>
+				</div>
+
+				<div class="card nextOne--card">
+					<div class="card__image" id="GrayList">
+						<img src="./images/Graylist.png" alt="" />
+					</div>
+				</div>
+
+				<div class="card nextTwo--card">
+					<div class="card__image" id="Message">
+						<img src="./images/Message.png" alt="" />
+					</div>
+				</div>
+
+				<div class="card previous--card">
+					<div class="card__image" id="Cache18">
+						<img src="./images/Cache18.png" alt="" />
+					</div>
+				</div>
+
+				<div class="card previousOne--card">
+					<div class="card__image" id="Plus18NF">
+						<img src="./images/Notfound18.png" alt="" />
+					</div>
+				</div>
+
+			</div>
+
+			<button class="cardList__btn btn btn--right">
+				<div class="icon">
+					<svg>
+						<use xlink:href="#arrow-right"></use>
+					</svg>
+				</div>
+			</button>
+		</div>
+
+		<div class="infoList">
+			<div class="info__wrapper">
+				<div class="info current--info">
+					<h1 class="text name">BlackList</h1>
+					<h4 class="text location">Dangerous URL</h4>
+					<p class="text description">A collection of URLs that are dangerous to you</p>
+				</div>
+
+				<div class="info next--info">
+					<h1 class="text name">WhiteList</h1>
+					<h4 class="text location">Clean URL</h4>
+					<p class="text description">A collection of reputable URLs</p>
+				</div>
+
+				<div class="info nextOne--info">
+					<h1 class="text name">GrayList</h1>
+					<h4 class="text location">Suspicious URL</h4>
+					<p class="text description">A collection that grows with your support</p>
+				</div>
+
+				<div class="info nextTwo--info">
+					<h1 class="text name">Message</h1>
+					<h4 class="text location">Connect to users</h4>
+					<p class="text description">Listen and receive user suggestions</p>
+				</div>
+
+				<div class="info previousOne--info">
+					<h1 class="text name">18+ Not Found</h1>
+					<h4 class="text location">Escape API</h4>
+					<p class="text description">URLs bypass censorship 18+</p>
+				</div>
+
+				<div class="info previous--info">
+					<h1 class="text name">Cache18</h1>
+					<h4 class="text location">URL 18+</h4>
+					<p class="text description">Searched and moderated by ourselves</p>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="app__bg">
+			<div class="app__bg__image current--image">
+				<img src="/MainPage/images/back1.png" alt="" />
+			</div>
+			<div class="app__bg__image next--image">
+				<img src="/MainPage/images/back2.jpg" alt="" />
+			</div>
+			<div class="app__bg__image nextOne--image">
+				<img src="/MainPage/images/back3.jpg" alt="" />
+			</div>
+			<div class="app__bg__image nextTwo--image">
+				<img src="/MainPage/images/back4.jpg" alt="" />
+			</div>
+			<div class="app__bg__image previous--image">
+				<img src="/MainPage/images/back6.jpg" alt="" />
+			</div>
+			<div class=" app__bg__image previousOne--image">
+				<img src="/MainPage/images/back5.jpg" alt="" />
+			</div>
+
+		</div>
+	</div>
+
+	<div class="loading__wrapper">
+		<div class="loader--text">Loading...</div>
+		<div class="loader">
+			<span></span>
+		</div>
+	</div>
+
+	<svg class="icons" style="display: none;">
+		<symbol id="arrow-left" xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'>
+			<polyline points='328 112 184 256 328 400'
+				style='fill:none;stroke:#fff;stroke-linecap:round;stroke-linejoin:round;stroke-width:48px;' />
+		</symbol>
+		<symbol id="arrow-right" xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'>
+			<polyline points='184 112 328 256 184 400'
+				style='fill:none;stroke:#fff;stroke-linecap:round;stroke-linejoin:round;stroke-width:48px' />
+		</symbol>
+	</svg>
+
+	<!-- 
+	<div class="support">
+		<a href="https://twitter.com/DevLoop01" target="_blank"><i class="fab fa-twitter-square"></i></a>
+		<a href="https://dribbble.com/devloop01" target="_blank"><i class="fab fa-dribbble"></i></a>
+	</div> -->
+	<!-- partial -->
+	<script src='https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js'></script>
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/3.3.3/gsap.min.js'></script>
+	<script src="./script.js"></script>
+
+</body>
+
+</html>

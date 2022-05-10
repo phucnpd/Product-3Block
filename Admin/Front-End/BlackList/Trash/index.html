@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>BlackList Trash | 3Block</title>
+    <!-- Favicon-->
+    <link rel="icon" href="../../MainPage/images/iconLogo.png" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.css'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../BlackList.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="../../MainPage/js/connetdatabase.js"></script>
+    <script src="../Trash_BlackList.js"></script>
+    <script>
+        (async function () {
+            var authen = localStorage.getItem('accesstoken')
+            //  xác thực here
+            const authorizationTokenCheck = await welcome()
+            console.log('html ' + authorizationTokenCheck)
+            if (!authorizationTokenCheck) {
+                window.location.pathname = './'
+            }
+        })()
+    </script>
+</head>
+
+<body onload="show(1)">
+    <nav class="navbar navbar-expand-custom navbar-mainbg">
+                <a href="../../MainPage/"><img src="/images/logoMini.png" /></a>
+        <button class="navbar-toggler" type="button" aria-controls="navbarSupportedContent" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <i class="fas fa-bars text-white"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+                <div class="hori-selector">
+                    <div class="left"></div>
+                    <div class="right"></div>
+                </div>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../BlackList/"><i class="far fa-clone"></i>BlackList</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../WhiteList/"><i class="fas fa-tachometer-alt"></i>WhiteList</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../GrayList/"><i class="far fa-address-book"></i>GrayList</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../Cache18/"><i class="far fa-chart-bar"></i>Cache18</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../18+NotFound/"><i class="far fa-copy"></i>18+ Not Found</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../Messages/"><i class="far fa-calendar-alt"></i>Messages</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container-xxl">
+        <div class="table-wrapper">
+            <div class="table-title">
+                <div class="row">
+                    <div class="col-sm-5">
+                        <form autocomplete="off">
+                            <div class="autocomplete">
+                                <div class="input-group rounded">
+                                    <input type="search" class="form-control rounded" placeholder="Search by URL"
+                                        aria-label="Search" aria-describedby="search-addon" id="searching" />
+                                    <span class="border-0 SearchButton" id="search-addon">
+                                        <i class="fa fa-search" onclick="searchurl(1)" type="submit"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-sm-5">
+                        <h3>⚠ Black List Trash⚠ </h3>
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="input-group rounded">
+                            <i id="RefreshButton" class='fa fa-refresh fa-spin fa-3x fa-fw'
+                                style='font-size:38px; color: coral;' onclick='refresh()' type='submit'></i>
+                            <a href="#" class="form-control rounded btn-success" data-toggle="modal"
+                                style="color: black; white-space: nowrap;"><i class="fa fa-plus-circle"></i><b>Add New
+                                    URL</b></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <p id="RenderData"></p>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="hint-text" style="float: left; margin-top: 3px;">Showing <b id="Render"></b> out of <b id="Total"></b> entries
+            </div>
+        </div>
+        <div class="col-sm-1">
+            <a href='#'><i style="position: block; justify-content: center; font-size: xx-large;" class='material-icons'
+                    data-toggle='tooltip' title='Home' onclick='getBlack()'>&#xE88A;</i></a>
+        </div>
+        <div class="col-sm-5">
+            <ul class="pagination" id="pagination-wrapper">
+
+            </ul>
+        </div>
+    </div>
+
+    <div id="addEmployeeModal" class="modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h4 class="modal-title">Add New BlackList URL</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>URL</label>
+                        <input id="newURL" type="text" class="form-control" required>
+                    </div>
+                </div>
+                <p id="notification" style="text-align: center;"></p>
+                <div class="modal-footer">
+                    <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+                    <input type="submit" class="btn btn-success" value="Add" onclick="addURL()">
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script src='https://code.jquery.com/jquery-3.4.1.min.js'></script>
+    <script src='https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js'></script>
+    <script src='https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js'></script>
+    <script src="../script.js"></script>
+</body>
+
+
+</html>

@@ -1,0 +1,3 @@
+global.API_KEY_VIRUSTOTAL = [
+    "ENTER YOUR API KEY HERE"
+];

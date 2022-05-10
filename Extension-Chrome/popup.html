@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>3 Block</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+
+  <img id="soft" src="/images/logoMini.png" alt="logo 3block">
+  <div class="wrapper">
+    <button class="button-33" id="myCheck" role="button" style="margin-left :22%">Children Mode: <b>On</b></button>
+    <a href="/custom/index.html" target="_blank"><i class="fa fa-gear fa-spin"
+        style="font-size:24px;margin-left :8%"></i></a>
+
+  </div>
+  <div id="chart" class="chart-container"></div>
+  <svg class="donut" width="300" height="100%" viewBox="0 0 42 42">
+    <circle class="donut-hole" cx="21" cy="21" r="15.91549430918954" fill="#fff"></circle>
+
+
+    <circle id="donut-segment1" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#b1c94e"
+      stroke-width="3" stroke-dasharray="0 100" stroke-dashoffset="25"></circle>
+
+
+    <circle id="donut-segment3" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#aaddff"
+      stroke-width="3" stroke-dasharray="0 100" stroke-dashoffset="25"></circle>
+
+
+    <circle id="donut-segment2" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#ce4b99"
+      stroke-width="3" stroke-dasharray="0 100" stroke-dashoffset="25"></circle>
+
+    <g class="chart-text">
+      <text x="50%" y="50%" class="chart-number" id="totalValue">0</text>
+      <text x="50%" y="50%" class="chart-label">Safe</text>
+    </g>
+  </svg>
+
+  <div id="loading" class="button-36">Waiting for page to load...</div>
+  <div id="default" class="button-33">No iframes detected!</div>
+  <div id="error" class="button-35">Sorry, an error occurred retrieving iframe information on this page.</div>
+
+  <div id="content" style="padding-top: 20px;">
+    <table id="iframes">
+      <!-- chỉ là css thôi -->
+      <thead>
+        <tr>
+          <td id="titleIfarm">Iframe Domain</td>
+          <td id="deleteIfarm">Delete</td>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <div id="noSrc">
+      <span id="iframesNoSrc"></span>
+      <button id="deleteNoSrc" class="material-icons">Delete</button>
+    </div>
+    <button id="deleteAll" class="button-35">Delete All <span class="material-icons"></span></button>
+  </div>
+  <!-- <div id="loading" class="button-36">Waiting for page to load...</div>
+  <div id="default" class="button-33">No iframes detected!</div>
+  <div id="error" class="button-35">Sorry, an error occurred retrieving iframe information on this page.</div> -->
+  <div id="footer" style="font-size: xx-small;">Iframe Detector powered by <a id="siteLink"
+      href="https://3block.systems/">3Block</a></div>
+</body>
+<script type="module" src="popup.js"></script>
+<script type="module" src="background.js"></script>
+<link rel="stylesheet" href="popup.css" />
+
+</html>
